@@ -17,7 +17,6 @@ tuning <- "e2 a2 d3 g3 c4 f4"
 # Function to plot and save a chord
 plot_and_save_chord <- function(
   chord_name,
-  string_positions,
   fret_positions,
   title = NULL,
   point_fill = "dodgerblue",
@@ -25,7 +24,7 @@ plot_and_save_chord <- function(
 ) {
   # Filter out muted strings (where fret is NA)
   active_strings <- !is.na(fret_positions)
-  active_string_positions <- string_positions[active_strings]
+  active_string_positions <- (6:1)[active_strings]
   active_fret_positions <- fret_positions[active_strings]
 
   # Create the plot
@@ -59,22 +58,20 @@ plot_and_save_chord <- function(
 }
 
 # Define some example chords
-# Format: list(name, string_positions, fret_positions)
+# Format: list(name, fret_positions)
 # Note: Use NA in fret_positions to indicate a muted string
+# Fret positions are from 6th string to 1st string
 chords <- list(
   list(
     name = "A7sus4(13)",
-    strings = 6:1,
-    frets = c(5, NA, 5, 7, 6, NA)  # 6th and 1st strings are muted
+    frets = c(5, NA, 5, 7, 6, NA) # 6th and 1st strings are muted
   ),
   list(
     name = "E Major",
-    strings = 6:1,
     frets = c(0, 2, 2, 1, 0, 0)
   ),
   list(
     name = "E Minor",
-    strings = 6:1,
     frets = c(0, 2, 2, 0, 0, 0)
   )
 )
@@ -83,7 +80,6 @@ chords <- list(
 for (chord in chords) {
   plot_and_save_chord(
     chord_name = chord$name,
-    string_positions = chord$strings,
     fret_positions = chord$frets,
     title = chord$name
   )
