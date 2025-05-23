@@ -20,7 +20,7 @@ run:
 
 # Format R files
 format:
-	Rscript -e "styler::style_file('*.R')"
+	air format *.R
 
 # Install git hooks
 install-hooks:
