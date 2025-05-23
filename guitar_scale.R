@@ -18,7 +18,7 @@ tuning <- "e2 a2 d3 g3 c4 f4"
 # Define the A major scale notes
 a_major_scale <- c("a", "b", "c#", "d", "e", "f#", "g#")
 
-plot_fretboard(
+p <- plot_fretboard(
   string = 6:1,
   fret = c(5, 4, 2, 1, 0, 0),
   "notes",
@@ -45,4 +45,4 @@ fret <- 1:12
 #   ggtitle("A Major Scale")
 
 # Save the plot
-ggsave("a_major_scale.png", p, width = 10, height = 6)
+ggsave("plots/a_major_scale.png", p, width = 10, height = 6)
