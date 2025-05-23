@@ -14,6 +14,7 @@ library(ggplot2)
 # Define the tuning (EADGCF)
 tuning <- "e2 a2 d3 g3 c4 f4"
 
+# Function to plot and save a chord
 plot_and_save_chord <- function(
   chord_name,
   string_positions,
@@ -22,10 +23,15 @@ plot_and_save_chord <- function(
   point_fill = "dodgerblue",
   label_color = "white"
 ) {
+  # Filter out muted strings (where fret is NA)
+  active_strings <- !is.na(fret_positions)
+  active_string_positions <- string_positions[active_strings]
+  active_fret_positions <- fret_positions[active_strings]
+
   # Create the plot
   p <- plot_fretboard(
-    string = string_positions,
-    fret = fret_positions,
+    string = active_string_positions,
+    fret = active_fret_positions,
     "notes",
     horizontal = TRUE,
     tuning = tuning,
@@ -54,21 +60,22 @@ plot_and_save_chord <- function(
 
 # Define some example chords
 # Format: list(name, string_positions, fret_positions)
+# Note: Use NA in fret_positions to indicate a muted string
 chords <- list(
   list(
-    name = "A Major",
+    name = "A7sus4(13)",
     strings = 6:1,
-    frets = c(5, 4, 2, 1, 0, 0)
+    frets = c(5, NA, 5, 7, 6, NA)  # 6th and 1st strings are muted
   ),
   list(
     name = "E Major",
     strings = 6:1,
-    frets = c(0, 0, 1, 1, 1, 0)
+    frets = c(0, 2, 2, 1, 0, 0)
   ),
   list(
-    name = "D Major",
+    name = "E Minor",
     strings = 6:1,
-    frets = c(2, 3, 2, 0, 0, 0)
+    frets = c(0, 2, 2, 0, 0, 0)
   )
 )
 
