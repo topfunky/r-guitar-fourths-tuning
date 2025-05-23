@@ -14,7 +14,7 @@ library(ggplot2)
 # Define the tuning (EADGCF)
 tuning <- "e2 a2 d3 g3 c4 f4"
 
-# Function to plot and save a chord
+
 plot_and_save_chord <- function(
   chord_name,
   fret_positions,
@@ -64,7 +64,7 @@ plot_and_save_chord <- function(
 chords <- list(
   list(
     name = "A7sus4(13)",
-    frets = c(5, NA, 5, 7, 6, NA) # 6th and 1st strings are muted
+    frets = c(5, NA, 5, 7, 6, NA)
   ),
   list(
     name = "E Major",
