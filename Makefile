@@ -1,6 +1,6 @@
 # Makefile for r-guitar-perfect-fourths
 
-.PHONY: all deps lilypond run format
+.PHONY: all deps lilypond run format install-hooks
 
 all: deps lilypond run
 
@@ -18,6 +18,13 @@ lilypond:
 run:
 	Rscript guitar_scale.R
 
-# Format R code using Air
+# Format R files
 format:
-	air format guitar_scale.R
+	Rscript -e "styler::style_file('*.R')"
+
+# Install git hooks
+install-hooks:
+	@mkdir -p .git/hooks
+	@echo '#!/bin/sh\nmake format' > .git/hooks/pre-commit
+	@chmod +x .git/hooks/pre-commit
+	@echo "Git hooks installed successfully"
