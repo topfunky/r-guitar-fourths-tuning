@@ -1,6 +1,6 @@
 # Makefile for r-guitar-perfect-fourths
 
-.PHONY: all deps lilypond run format install-hooks
+.PHONY: all deps lilypond run format install-hooks clean
 
 all: install-hooksdeps lilypond run
 
@@ -15,7 +15,7 @@ lilypond:
 	brew install lilypond
 
 # Run the R script to generate the visualization
-run:
+run: clean
 	Rscript guitar_scale.R
 
 # Format R files
@@ -28,3 +28,7 @@ install-hooks:
 	@echo '#!/bin/sh\nmake format' > .git/hooks/pre-commit
 	@chmod +x .git/hooks/pre-commit
 	@echo "Git hooks installed successfully"
+
+# Clean up generated files
+clean:
+	rm -rf plots/*

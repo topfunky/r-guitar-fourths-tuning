@@ -11,12 +11,8 @@ if (!require("ggplot2")) install.packages("ggplot2")
 library(tabr)
 library(ggplot2)
 
-# Source the plot_chord.R file
-source("plot_chord.R")
-
 # Define the tuning (EADGCF)
 tuning <- "e2 a2 d3 g3 c4 f4"
-
 
 plot_and_save_chord <- function(
   chord_name,
@@ -58,32 +54,4 @@ plot_and_save_chord <- function(
   ggsave(filename, p, width = 10, height = 6)
 
   return(p)
-}
-
-# Define some example chords
-# Format: list(name, fret_positions)
-# Note: Use NA in fret_positions to indicate a muted string
-# Fret positions are from 6th string to 1st string
-chords <- list(
-  list(
-    name = "A7sus4(13)",
-    frets = c(5, NA, 5, 7, 6, NA)
-  ),
-  list(
-    name = "E Major",
-    frets = c(0, 2, 2, 1, 0, 0)
-  ),
-  list(
-    name = "E Minor",
-    frets = c(0, 2, 2, 0, 0, 0)
-  )
-)
-
-# Plot and save each chord
-for (chord in chords) {
-  plot_and_save_chord(
-    chord_name = chord$name,
-    fret_positions = chord$frets,
-    title = chord$name
-  )
 }
