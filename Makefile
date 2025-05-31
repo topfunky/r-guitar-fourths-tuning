@@ -18,7 +18,7 @@ lilypond:
 run: clean
 	Rscript guitar_scale.R
 	Rscript guitar_chord.R
-
+	Rscript guitar_scale_relative.R
 # Format R files
 format:
 	air format *.R

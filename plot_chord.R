@@ -72,7 +72,8 @@ plot_and_save_scale <- function(
   label_color = "white",
   highlight_positions = NULL, # Vector of indices to highlight
   highlight_color = "white", # Color for highlighted notes
-  highlight_label_color = "black" # Color for highlighted note labels
+  highlight_label_color = "black", # Color for highlighted note labels
+  note_labels = NULL # Vector of custom labels for each note
 ) {
   # Validate inputs
   if (length(string_positions) != length(fret_positions)) {
@@ -87,6 +88,10 @@ plot_and_save_scale <- function(
     stop("fret_positions cannot be negative")
   }
 
+  if (!is.null(note_labels) && length(note_labels) != length(fret_positions)) {
+    stop("note_labels must have the same length as fret_positions")
+  }
+
   # Create color vectors for all notes
   point_colors <- rep(point_fill, length(fret_positions))
   label_colors <- rep(label_color, length(fret_positions))
@@ -97,11 +102,10 @@ plot_and_save_scale <- function(
     label_colors[highlight_positions] <- highlight_label_color
   }
 
-  # Create the plot
-  p <- plot_fretboard(
+  # Create base plot arguments
+  plot_args <- list(
     string = string_positions,
     fret = fret_positions,
-    "notes",
     horizontal = TRUE,
     tuning = tuning,
     show_tuning = TRUE,
@@ -109,6 +113,16 @@ plot_and_save_scale <- function(
     label_color = label_colors,
     point_fill = point_colors
   )
+
+  # Add labels argument only if note_labels is provided
+  if (!is.null(note_labels)) {
+    plot_args$labels <- note_labels
+  } else {
+    plot_args$labels <- "notes"
+  }
+
+  # Create the plot
+  p <- do.call(plot_fretboard, plot_args)
 
   # Add title if provided
   if (!is.null(title)) {
