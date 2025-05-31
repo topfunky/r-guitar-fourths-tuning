@@ -6,7 +6,7 @@ source("plot_chord.R")
 # Format: list(name, fret_positions)
 # Note: Use NA in fret_positions to indicate a muted string
 # Fret positions are from 6th string to 1st string
-chords <- list(
+scales <- list(
   list(
     name = "A7sus4(13)",
     frets = c(5, 6, 5, 7, 6, 2, 3),
@@ -24,11 +24,11 @@ chords <- list(
   )
 )
 
-# Plot and save each chord
-for (chord in chords) {
+# Plot and save each scale
+for (scale in scales) {
   plot_and_save_scale(
-    string_positions = chord$strings,
-    fret_positions = chord$frets,
-    title = chord$name
+    string_positions = scale$strings,
+    fret_positions = scale$frets,
+    title = scale$name
   )
 }
