@@ -8,19 +8,23 @@ source("plot_chord.R")
 # Fret positions are from 6th string to 1st string
 scales <- list(
   list(
-    name = "A7sus4(13)",
-    frets = c(5, 6, 5, 7, 6, 2, 3),
-    strings = c(1, 2, 3, 4, 5, 6, 6)
-  ),
-  list(
-    name = "E Major",
-    frets = c(0, 2, 2, 1, 0, 0),
-    strings = c(1, 2, 3, 4, 5, 6) 
-  ),
-  list(
-    name = "E Minor",
-    frets = c(0, 2, 2, 0, 0, 0),
-    strings = c(1, 2, 3, 4, 5, 6)
+    name = "C major",
+    frets = c(
+      0, 1, 3, 5, 7, 8, 10, 12, 13,  # String 6
+      3, 5, 7, 8, 10, 12, 14,  # String 5
+      10, 12, 14, 15,  # String 4
+      5, 7, 9, 10, 12, 14, 16,  # String 3
+      0, 2, 4, 5, 7, 9, 11,  # String 2
+      5, 7, 9, 10, 12, 14, 16  # String 1
+    ),
+    strings = c(
+      1, 1, 1, 1, 1, 1, 1, 1, 1, # String 1 Low E
+      2, 2, 2, 2, 2, 2, 2,  # String 2 Low A
+      3, 3, 3, 3,  # String 3 Low D
+      4, 4, 4, 4, 4, 4, 4,  # String 4 Low G
+      5, 5, 5, 5, 5, 5, 5,  # String 5 High C
+      6, 6, 6, 6, 6, 6, 6  # String 6 High E
+    )
   )
 )
 

@@ -65,8 +65,8 @@ plot_and_save_chord <- function(
 
 # Function to plot and save a scale with multiple notes per string
 plot_and_save_scale <- function(
-  string_positions,  # Vector of string numbers (1-6)
-  fret_positions,    # Vector of fret positions (0-25)
+  string_positions, # Vector of string numbers (1-6)
+  fret_positions, # Vector of fret positions (0-25)
   title = NULL,
   point_fill = "black",
   label_color = "white"
@@ -75,11 +75,11 @@ plot_and_save_scale <- function(
   if (length(string_positions) != length(fret_positions)) {
     stop("string_positions and fret_positions must have the same length")
   }
-  
+
   if (any(string_positions < 1 | string_positions > 6)) {
     stop("string_positions must be between 1 and 6")
   }
-  
+
   if (any(fret_positions < 0, na.rm = TRUE)) {
     stop("fret_positions cannot be negative")
   }
@@ -115,4 +115,3 @@ plot_and_save_scale <- function(
 
   return(p)
 }
-
