@@ -31,7 +31,7 @@ jobs:
         make run
     
     - name: Upload generated plots
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: plots
         path: plots/ 
