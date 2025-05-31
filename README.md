@@ -1,3 +1,7 @@
 # Guitar tab visualization
 
-Using https://leonawicz.github.io/tabr/articles/tabr-fretboard.html create a chart of all the notes in the scale of A major on a guitar fretboard. Use tuning EADGCF. Display root notes in red and others in grey.
+Using https://leonawicz.github.io/tabr/articles/tabr-fretboard.html, creates a chart of chords and scales.
+
+Uses fourths tuning EADGCF.
+
+![C major scale](plots/scale_c_major.png)

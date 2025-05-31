@@ -4,7 +4,9 @@
 - Always use tabr's expected format where strings are numbered 6 to 1
 - 6 = lowest string (E)
 - 1 = highest string (F)
-- When defining string positions, use 6:1 format
+- Define string positions directly in 6:1 format
+- DO NOT convert between formats - use 6:1 format throughout the code
+- Example: string_positions <- c(6, 5, 4, 3, 2, 1) for all strings
 
 ## Fret Positions
 - Fret positions start at 0 (open string)

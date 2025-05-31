@@ -9,15 +9,13 @@ string_3_frets <- c(0, 2, 4, 5, 7, 9, 10, 12, 14) # G string
 string_2_frets <- c(0, 0, 2, 4, 5, 7, 9, 11, 12, 14) # C string
 string_1_frets <- c(0, 2, 4, 6, 7, 9, 11, 12, 14) # F string
 
-# Define positions of root notes (C) in the scale
-root_positions <- c(
-  which(string_6_frets == 8),
-  which(string_5_frets == 3),
-  which(string_4_frets == 10),
-  which(string_3_frets == 5),
-  which(string_2_frets == 0),
-  which(string_1_frets == 7)
-)
+# Define root note positions (C) for each string
+root_6_frets <- c(8) # Low E string
+root_5_frets <- c(3, 15) # A string
+root_4_frets <- c(10) # D string
+root_3_frets <- c(5) # G string
+root_2_frets <- c(0, 12) # C string
+root_1_frets <- c(7) # F string
 
 # Combine all fret positions
 all_frets <- c(
@@ -39,26 +37,28 @@ all_strings <- c(
   rep(6, length(string_6_frets))
 )
 
-# Calculate absolute positions of root notes in the combined vectors
+# Find indices of root notes in the combined arrays
 root_indices <- c(
-  root_positions[1],
-  length(string_1_frets) + root_positions[2],
-  length(string_1_frets) + length(string_2_frets) + root_positions[3],
+  which(string_1_frets %in% root_1_frets),
+  length(string_1_frets) + which(string_2_frets %in% root_2_frets),
+  length(string_1_frets) +
+    length(string_2_frets) +
+    which(string_3_frets %in% root_3_frets),
   length(string_1_frets) +
     length(string_2_frets) +
     length(string_3_frets) +
-    root_positions[4],
+    which(string_4_frets %in% root_4_frets),
   length(string_1_frets) +
     length(string_2_frets) +
     length(string_3_frets) +
     length(string_4_frets) +
-    root_positions[5],
+    which(string_5_frets %in% root_5_frets),
   length(string_1_frets) +
     length(string_2_frets) +
     length(string_3_frets) +
     length(string_4_frets) +
     length(string_5_frets) +
-    root_positions[6]
+    which(string_6_frets %in% root_6_frets)
 )
 
 # Define scales list with the combined data
@@ -78,6 +78,7 @@ for (scale in scales) {
     fret_positions = scale$frets,
     title = scale$name,
     highlight_positions = scale$root_positions,
-    highlight_color = "maroon"
+    highlight_color = "white",
+    highlight_label_color = "black"
   )
 }

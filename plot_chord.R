@@ -65,13 +65,14 @@ plot_and_save_chord <- function(
 
 # Function to plot and save a scale with multiple notes per string
 plot_and_save_scale <- function(
-  string_positions, # Vector of string numbers (1-6)
+  string_positions, # Vector of string numbers (6-1)
   fret_positions, # Vector of fret positions (0-25)
   title = NULL,
   point_fill = "black",
   label_color = "white",
   highlight_positions = NULL, # Vector of indices to highlight
-  highlight_color = "red" # Color for highlighted notes
+  highlight_color = "white", # Color for highlighted notes
+  highlight_label_color = "black" # Color for highlighted note labels
 ) {
   # Validate inputs
   if (length(string_positions) != length(fret_positions)) {
@@ -86,6 +87,16 @@ plot_and_save_scale <- function(
     stop("fret_positions cannot be negative")
   }
 
+  # Create color vectors for all notes
+  point_colors <- rep(point_fill, length(fret_positions))
+  label_colors <- rep(label_color, length(fret_positions))
+
+  # Set colors for highlighted notes
+  if (!is.null(highlight_positions)) {
+    point_colors[highlight_positions] <- highlight_color
+    label_colors[highlight_positions] <- highlight_label_color
+  }
+
   # Create the plot
   p <- plot_fretboard(
     string = string_positions,
@@ -95,23 +106,9 @@ plot_and_save_scale <- function(
     tuning = tuning,
     show_tuning = TRUE,
     fret_labels = c(3, 5, 7, 9, 12),
-    label_color = label_color,
-    point_fill = point_fill
+    label_color = label_colors,
+    point_fill = point_colors
   )
-
-  # Add highlighted notes if specified
-  if (!is.null(highlight_positions)) {
-    p <- p +
-      geom_point(
-        data = data.frame(
-          string = string_positions[highlight_positions],
-          fret = fret_positions[highlight_positions]
-        ),
-        aes(x = string, y = fret),
-        color = highlight_color,
-        size = 3
-      )
-  }
 
   # Add title if provided
   if (!is.null(title)) {
