@@ -69,7 +69,9 @@ plot_and_save_scale <- function(
   fret_positions, # Vector of fret positions (0-25)
   title = NULL,
   point_fill = "black",
-  label_color = "white"
+  label_color = "white",
+  highlight_positions = NULL, # Vector of indices to highlight
+  highlight_color = "red" # Color for highlighted notes
 ) {
   # Validate inputs
   if (length(string_positions) != length(fret_positions)) {
@@ -84,9 +86,6 @@ plot_and_save_scale <- function(
     stop("fret_positions cannot be negative")
   }
 
-  # Convert string positions to match tabr's expected format (6:1)
-  string_positions <- 7 - string_positions
-
   # Create the plot
   p <- plot_fretboard(
     string = string_positions,
@@ -99,6 +98,20 @@ plot_and_save_scale <- function(
     label_color = label_color,
     point_fill = point_fill
   )
+
+  # Add highlighted notes if specified
+  if (!is.null(highlight_positions)) {
+    p <- p +
+      geom_point(
+        data = data.frame(
+          string = string_positions[highlight_positions],
+          fret = fret_positions[highlight_positions]
+        ),
+        aes(x = string, y = fret),
+        color = highlight_color,
+        size = 3
+      )
+  }
 
   # Add title if provided
   if (!is.null(title)) {
