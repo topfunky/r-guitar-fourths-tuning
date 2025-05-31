@@ -23,8 +23,11 @@ jobs:
         make lilypond
     
     - name: Install R dependencies
+      env:
+        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        make deps
+        Rscript -e "install.packages(c('remotes', 'ggplot2'), repos='https://cloud.r-project.org')"
+        Rscript -e "remotes::install_github('leonawicz/tabr', auth_token = Sys.getenv('GITHUB_PAT'))"
     
     - name: Run R scripts
       run: |
