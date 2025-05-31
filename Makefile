@@ -2,7 +2,7 @@
 
 .PHONY: all deps lilypond run format install-hooks clean
 
-all: install-hooksdeps lilypond run
+all: install-hooks deps lilypond run
 
 # Install R dependencies
 # tabr is installed from GitHub

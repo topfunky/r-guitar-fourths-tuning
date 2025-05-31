@@ -1,0 +1,37 @@
+name: Run R Scripts
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: '4.3.0'
+    
+    - name: Install system dependencies
+      run: |
+        make lilypond
+    
+    - name: Install R dependencies
+      run: |
+        make deps
+    
+    - name: Run R scripts
+      run: |
+        make run
+    
+    - name: Upload generated plots
+      uses: actions/upload-artifact@v3
+      with:
+        name: plots
+        path: plots/ 
