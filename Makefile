@@ -17,6 +17,7 @@ lilypond:
 # Run the R script to generate the visualization
 run: clean
 	Rscript guitar_scale.R
+	Rscript guitar_chord.R
 
 # Format R files
 format:

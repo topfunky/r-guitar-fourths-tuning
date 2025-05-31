@@ -14,6 +14,20 @@ library(ggplot2)
 # Define the tuning (EADGCF)
 tuning <- "e2 a2 d3 g3 c4 f4"
 
+# Helper function to save plots to file
+save_plot_to_file <- function(plot, name) {
+  # Create plots directory if it doesn't exist
+  if (!dir.exists("plots")) {
+    dir.create("plots")
+  }
+
+  # Save the plot
+  filename <- paste0("plots/", tolower(gsub(" ", "_", name)), ".png")
+  ggsave(filename, plot, width = 10, height = 6)
+}
+
+# A simple function to plot and save a single chord.
+# Assumes that there is only one note on each string.
 plot_and_save_chord <- function(
   chord_name,
   fret_positions,
@@ -44,14 +58,61 @@ plot_and_save_chord <- function(
     p <- p + ggtitle(title)
   }
 
-  # Create plots directory if it doesn't exist
-  if (!dir.exists("plots")) {
-    dir.create("plots")
-  }
-
-  # Save the plot
-  filename <- paste0("plots/", tolower(gsub(" ", "_", chord_name)), ".png")
-  ggsave(filename, p, width = 10, height = 6)
+  save_plot_to_file(p, chord_name)
 
   return(p)
 }
+
+# Function to plot and save a scale with multiple notes per string
+plot_and_save_scale <- function(
+  string_positions,  # Vector of string numbers (1-6)
+  fret_positions,    # Vector of fret positions (0-25)
+  title = NULL,
+  point_fill = "black",
+  label_color = "white"
+) {
+  # Validate inputs
+  if (length(string_positions) != length(fret_positions)) {
+    stop("string_positions and fret_positions must have the same length")
+  }
+  
+  if (any(string_positions < 1 | string_positions > 6)) {
+    stop("string_positions must be between 1 and 6")
+  }
+  
+  if (any(fret_positions < 0, na.rm = TRUE)) {
+    stop("fret_positions cannot be negative")
+  }
+
+  # Convert string positions to match tabr's expected format (6:1)
+  string_positions <- 7 - string_positions
+
+  # Create the plot
+  p <- plot_fretboard(
+    string = string_positions,
+    fret = fret_positions,
+    "notes",
+    horizontal = TRUE,
+    tuning = tuning,
+    show_tuning = TRUE,
+    fret_labels = c(3, 5, 7, 9, 12),
+    label_color = label_color,
+    point_fill = point_fill
+  )
+
+  # Add title if provided
+  if (!is.null(title)) {
+    p <- p + ggtitle(title)
+  }
+
+  filename = paste(
+    "scale",
+    paste(title, collapse = "_"),
+    sep = "_"
+  )
+
+  save_plot_to_file(p, filename)
+
+  return(p)
+}
+
