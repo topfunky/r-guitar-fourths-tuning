@@ -2,7 +2,7 @@
 
 .PHONY: all deps lilypond run format install-hooks
 
-all: deps lilypond run
+all: install-hooksdeps lilypond run
 
 # Install R dependencies
 # tabr is installed from GitHub
@@ -12,7 +12,7 @@ deps:
 
 # Install LilyPond using Homebrew
 lilypond:
-	brew install --cask lilypond
+	brew install lilypond
 
 # Run the R script to generate the visualization
 run:
