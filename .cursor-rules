@@ -21,9 +21,8 @@
 - Group related notes with comments (e.g., # Root notes)
 
 ## Plotting
-- Use black for regular notes
-- Use maroon for root notes
-- Use white for labels
+- Use black for regular notes, and white for labels
+- Use white for root notes, and black for root note labels
 - Include fret markers at 3, 5, 7, 9, and 12
 - Always show tuning information
 - Use horizontal orientation for fretboard
