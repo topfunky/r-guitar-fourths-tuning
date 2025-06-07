@@ -1,4 +1,4 @@
-name: Run R Scripts
+name: Build and Deploy
 
 on:
   push:
@@ -8,6 +8,9 @@ on:
 
 jobs:
   build:
+    name: Build and Deploy
+    needs: test
+    if: ${{ needs.test.outputs.status == 'success' }}
     runs-on: macos-latest
 
     steps:
@@ -16,24 +19,15 @@ jobs:
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
       with:
-        r-version: '4.3.0'
+        r-version: '4.4.0'
 
     - name: Install system dependencies
       run: |
         make lilypond
 
     - name: Install R dependencies
-      env:
-        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       run: |
         make deps
 
-    - name: Run R scripts
-      run: |
-        make run
-
-    - name: Upload generated plots
-      uses: actions/upload-artifact@v4
-      with:
-        name: plots
-        path: plots/
+    - name: Build
+      run: make run
