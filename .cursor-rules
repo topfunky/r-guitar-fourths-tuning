@@ -1,6 +1,7 @@
 # R Guitar Fourths Tuning Project Rules
 
 ## String Numbering
+
 - Always use tabr's expected format where strings are numbered 6 to 1
 - 6 = lowest string (E)
 - 1 = highest string (F)
@@ -9,18 +10,21 @@
 - Example: string_positions <- c(6, 5, 4, 3, 2, 1) for all strings
 
 ## Fret Positions
+
 - Fret positions start at 0 (open string)
 - Use NA to indicate muted strings
 - Maximum fret position is 25
 - Fret positions cannot be negative
 
 ## Scale Definitions
+
 - Define fret positions for each string separately
 - Use descriptive variable names: string_X_frets where X is the string number
 - Include comments indicating which string is which (e.g., # Low E string)
 - Group related notes with comments (e.g., # Root notes)
 
 ## Plotting
+
 - Use black for regular notes, and white for labels
 - Use white for root notes, and black for root note labels
 - Include fret markers at 3, 5, 7, 9, and 12
@@ -28,15 +32,17 @@
 - Use horizontal orientation for fretboard
 
 ## File Organization
+
 - Keep scale definitions in guitar_scale.R
-- Keep plotting functions in plot_chord.R
+- Keep plotting functions in utils_plot.R
 - Use descriptive filenames that indicate content
 - Save plots to the plots/ directory
 
 ## Code Style
+
 - Use meaningful variable names
 - Include comments for complex calculations
 - Group related operations together
 - Validate inputs in functions
 - Use consistent indentation (2 spaces)
-- Keep lines under 80 characters when possible 
+- Keep lines under 80 characters when possible

@@ -1,5 +1,5 @@
-# Source the plot_chord.R file
-source("plot_chord.R")
+# Source the utils_plot.R file
+source("utils_plot.R")
 
 # Define fret positions for each string in C major scale
 string_6_frets <- c(0, 1, 3, 5, 7, 8, 10, 12, 13, 15) # Low E string
