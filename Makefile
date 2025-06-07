@@ -1,14 +1,17 @@
 # Makefile for r-guitar-perfect-fourths
 
-.PHONY: all deps lilypond run format install-hooks clean
+.PHONY: all deps lilypond run format install-hooks test
 
-all: install-hooks deps lilypond run
+all: deps lilypond run
 
 # Install R dependencies
 # tabr is installed from GitHub
 # remotes is used to install tabr
 deps:
-	Rscript -e "if (!require('remotes')) install.packages('remotes', repos='https://cloud.r-project.org'); if (!require('ggplot2')) install.packages('ggplot2', repos='https://cloud.r-project.org'); if (!require('tabr')) remotes::install_github('leonawicz/tabr')"
+	Rscript -e "if (!require('remotes')) install.packages('remotes')"
+	Rscript -e "if (!require('tabr')) remotes::install_github('leonawicz/tabr')"
+	Rscript -e "if (!require('ggplot2')) install.packages('ggplot2')"
+	Rscript -e "if (!require('styler')) install.packages('styler')"
 
 # Install LilyPond using Homebrew
 lilypond:
@@ -19,6 +22,7 @@ run: clean
 	Rscript guitar_scale.R
 	Rscript guitar_chord.R
 	Rscript guitar_scale_relative.R
+
 # Format R files
 format:
 	air format *.R

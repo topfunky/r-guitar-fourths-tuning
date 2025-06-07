@@ -6,7 +6,10 @@ test_major_scale_intervals <- function() {
   # Test structure of intervals
   stopifnot(
     length(major_scale_intervals) == 8,
-    all(sapply(major_scale_intervals, function(x) all(c("name", "degree", "semitones", "symbol") %in% names(x))))
+    all(sapply(
+      major_scale_intervals,
+      function(x) all(c("name", "degree", "semitones", "symbol") %in% names(x))
+    ))
   )
 
   # Test degrees are sequential

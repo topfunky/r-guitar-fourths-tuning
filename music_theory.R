@@ -16,37 +16,37 @@ major_scale_intervals <- list(
   list(
     name = "Major Third",
     degree = 3,
-    semitones = 4,  # 2 semitones up from major second
+    semitones = 4, # 2 semitones up from major second
     symbol = "3"
   ),
   list(
     name = "Perfect Fourth",
     degree = 4,
-    semitones = 5,  # 1 semitone up from major third
+    semitones = 5, # 1 semitone up from major third
     symbol = "4"
   ),
   list(
     name = "Perfect Fifth",
     degree = 5,
-    semitones = 7,  # 2 semitones up from perfect fourth
+    semitones = 7, # 2 semitones up from perfect fourth
     symbol = "5"
   ),
   list(
     name = "Major Sixth",
     degree = 6,
-    semitones = 9,  # 2 semitones up from perfect fifth
+    semitones = 9, # 2 semitones up from perfect fifth
     symbol = "6"
   ),
   list(
     name = "Major Seventh",
     degree = 7,
-    semitones = 11,  # 2 semitones up from major sixth
+    semitones = 11, # 2 semitones up from major sixth
     symbol = "7"
   ),
   list(
     name = "Octave",
     degree = 8,
-    semitones = 12,  # 1 semitone up from major seventh
+    semitones = 12, # 1 semitone up from major seventh
     symbol = "8"
   )
 )
@@ -84,7 +84,9 @@ get_interval_by_semitones <- function(semitones) {
 # Function to get all intervals up to a certain number of semitones
 get_intervals_up_to_semitones <- function(max_semitones) {
   # Validate input
-  if (is.null(max_semitones) || is.na(max_semitones) || !is.numeric(max_semitones)) {
+  if (
+    is.null(max_semitones) || is.na(max_semitones) || !is.numeric(max_semitones)
+  ) {
     return(list())
   }
 

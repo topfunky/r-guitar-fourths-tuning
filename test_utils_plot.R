@@ -103,44 +103,53 @@ test_plot_and_save_scale <- function() {
   )
 
   # Test input validation
-  tryCatch({
-    plot_and_save_scale(
-      string_positions = c(6, 6),
-      fret_positions = c(0, 2, 0),  # Mismatched lengths
-      title = "test_scale_error"
-    )
-    stop("Should have thrown an error for mismatched lengths")
-  }, error = function(e) {
-    if (!grepl("must have the same length", e$message)) {
-      stop("Wrong error message for mismatched lengths")
+  tryCatch(
+    {
+      plot_and_save_scale(
+        string_positions = c(6, 6),
+        fret_positions = c(0, 2, 0), # Mismatched lengths
+        title = "test_scale_error"
+      )
+      stop("Should have thrown an error for mismatched lengths")
+    },
+    error = function(e) {
+      if (!grepl("must have the same length", e$message)) {
+        stop("Wrong error message for mismatched lengths")
+      }
     }
-  })
+  )
 
-  tryCatch({
-    plot_and_save_scale(
-      string_positions = c(6, 7),  # Invalid string number
-      fret_positions = c(0, 2),
-      title = "test_scale_error"
-    )
-    stop("Should have thrown an error for invalid string number")
-  }, error = function(e) {
-    if (!grepl("must be between 1 and 6", e$message)) {
-      stop("Wrong error message for invalid string number")
+  tryCatch(
+    {
+      plot_and_save_scale(
+        string_positions = c(6, 7), # Invalid string number
+        fret_positions = c(0, 2),
+        title = "test_scale_error"
+      )
+      stop("Should have thrown an error for invalid string number")
+    },
+    error = function(e) {
+      if (!grepl("must be between 1 and 6", e$message)) {
+        stop("Wrong error message for invalid string number")
+      }
     }
-  })
+  )
 
-  tryCatch({
-    plot_and_save_scale(
-      string_positions = c(6, 6),
-      fret_positions = c(0, -1),  # Negative fret
-      title = "test_scale_error"
-    )
-    stop("Should have thrown an error for negative fret")
-  }, error = function(e) {
-    if (!grepl("cannot be negative", e$message)) {
-      stop("Wrong error message for negative fret")
+  tryCatch(
+    {
+      plot_and_save_scale(
+        string_positions = c(6, 6),
+        fret_positions = c(0, -1), # Negative fret
+        title = "test_scale_error"
+      )
+      stop("Should have thrown an error for negative fret")
+    },
+    error = function(e) {
+      if (!grepl("cannot be negative", e$message)) {
+        stop("Wrong error message for negative fret")
+      }
     }
-  })
+  )
 
   # Clean up test files
   unlink("plots/scale_test_scale.png")
