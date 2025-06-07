@@ -1,4 +1,10 @@
+# Load libraries
+library(tabr)
+library(ggplot2)
+
 source("utils_save_file.R")
+
+tuning <- "e2 a2 d3 g3 c4 f4"
 
 # Define intervals in a major scale
 # Each interval is defined by its name and the number of semitones from the root
@@ -293,7 +299,7 @@ plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
     fret = frets,
     labels = labels,
     horizontal = TRUE,
-    tuning = "e2 a2 d3 g3 c4 f4",
+    tuning = tuning,
     show_tuning = TRUE,
     fret_labels = c(3, 5, 7, 9, 12),
     label_color = "white",
@@ -302,7 +308,7 @@ plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
 
   # Add title
   title <- paste(key, scale_name, "Scale")
-  p <- p + ggtitle(title)
+  p <- p + ggplot2::ggtitle(title)
 
   save_plot_to_file(p, title)
 
