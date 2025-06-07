@@ -56,7 +56,7 @@ major_scale_intervals <- list(
 # Define scale patterns
 # Each pattern is defined by its name and the intervals relative
 # to the major scale.
-# Use "♭" for flat (lower by 1 semitone) and "#" for sharp (raise by 1 semitone)
+# Use "♭" for flat (lower by 1 semitone) and "♯" for sharp (raise by 1 semitone)
 scale_patterns <- list(
   list(
     name = "Major",
@@ -266,6 +266,9 @@ get_scale_fretboard_positions <- function(
     }
   }
 
+  # DEBUG: Print the positions in a Markdown formatted table
+  print_positions_table(positions)
+
   return(positions)
 }
 
@@ -356,4 +359,22 @@ get_intervals_up_to_semitones <- function(max_semitones) {
     }
   }
   return(result)
+}
+
+# Function to print positions as a markdown table
+print_positions_table <- function(positions) {
+  # Create header
+  cat("| String | Fret | Degree | Symbol |\n")
+  cat("|--------|------|--------|--------|\n")
+
+  # Print each position
+  for (pos in positions) {
+    cat(sprintf(
+      "| %d | %d | %d | %s |\n",
+      pos$string,
+      pos$fret,
+      pos$degree,
+      pos$symbol
+    ))
+  }
 }

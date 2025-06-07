@@ -24,7 +24,7 @@ plot_and_save_chord <- function(
   chord_name,
   fret_positions,
   title = NULL,
-  point_fill = "dodgerblue",
+  point_fill = "black",
   label_color = "white"
 ) {
   # Filter out muted strings (where fret is NA)
