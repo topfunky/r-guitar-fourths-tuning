@@ -54,7 +54,8 @@ major_scale_intervals <- list(
 )
 
 # Define scale patterns
-# Each pattern is defined by its name and the intervals relative to the major scale
+# Each pattern is defined by its name and the intervals relative
+# to the major scale.
 # Use "♭" for flat (lower by 1 semitone) and "#" for sharp (raise by 1 semitone)
 scale_patterns <- list(
   list(
@@ -103,19 +104,27 @@ scale_patterns <- list(
   ),
   list(
     name = "Altered",
-    pattern = c("1", "♭2", "#2", "3", "♭5", "#5", "♭7")
+    pattern = c("1", "♭2", "♭3", "♭4", "♭5", "♭6", "♭7")
   ),
   list(
     name = "Diminished",
-    pattern = c("1", "2", "♭3", "4", "♭5", "♭6", "6", "7")
+    pattern = c("1", "2", "♭3", "4", "♭5", "♭6", "7")
   ),
   list(
     name = "Whole Tone",
-    pattern = c("1", "2", "3", "#4", "#5", "♭7")
+    pattern = c("1", "2", "3", "♯4", "♯5", "♭7")
   ),
   list(
     name = "Blues",
     pattern = c("1", "♭3", "4", "♭5", "5", "♭7")
+  ),
+  list(
+    name = "Barry Harris Diminished Sixth",
+    pattern = c("1", "2", "3", "4", "5", "♯5", "6", "7")
+  ),
+  list(
+    name = "Barry Harris Diminished Minor",
+    pattern = c("1", "2", "♭3", "4", "5", "♯5", "6", "7")
   )
 )
 
