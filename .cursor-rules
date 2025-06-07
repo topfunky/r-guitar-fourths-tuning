@@ -40,9 +40,16 @@
 
 ## Code Style
 
+- Use `air` to format R files
 - Use meaningful variable names
 - Include comments for complex calculations
 - Group related operations together
 - Validate inputs in functions
 - Use consistent indentation (2 spaces)
 - Keep lines under 80 characters when possible
+
+## Testing
+
+- Write tests for all new functions
+- Keep tests in separate test\_\*.R files
+- Run tests before committing changes
