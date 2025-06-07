@@ -30,6 +30,9 @@ install-hooks:
 	@chmod +x .git/hooks/pre-commit
 	@echo "Git hooks installed successfully"
 
-# Clean up generated files
-clean:
-	rm -rf plots/*
+# Run tests
+test:
+	@echo "Running music theory tests..."
+	@Rscript test_music_theory.R
+	@echo "Running plotting utility tests..."
+	@Rscript test_utils_plot.R
