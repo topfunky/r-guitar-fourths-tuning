@@ -25,6 +25,7 @@ run: clean
 	Rscript guitar_scale.R
 	Rscript guitar_chord.R
 	Rscript guitar_scale_relative.R
+	Rscript guitar_modal_scales.R
 
 # Format R files
 format:

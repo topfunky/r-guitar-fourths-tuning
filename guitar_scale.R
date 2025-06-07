@@ -84,7 +84,3 @@ for (scale in scales) {
   )
 }
 
-
-# Plot C Phrygian Dominant scale
-p <- plot_scale("Phrygian Dominant", "C")
-save_plot_to_file(p, "c_phrygian_dominant")

@@ -96,11 +96,11 @@ scale_patterns <- list(
   ),
   list(
     name = "Lydian",
-    pattern = c("1", "2", "3", "#4", "5", "6", "7")
+    pattern = c("1", "2", "3", "♯4", "5", "6", "7")
   ),
   list(
     name = "Lydian Dominant",
-    pattern = c("1", "2", "3", "#4", "5", "6", "♭7")
+    pattern = c("1", "2", "3", "♯4", "5", "6", "♭7")
   ),
   list(
     name = "Altered",
@@ -165,7 +165,7 @@ pattern_to_semitones <- function(pattern) {
 
   for (i in seq_along(pattern)) {
     # Get the base interval (1-7)
-    base_degree <- as.numeric(gsub("[♭#]", "", pattern[i]))
+    base_degree <- as.numeric(gsub("[♭♯b#]", "", pattern[i]))
     base_interval <- get_interval_by_degree(base_degree)
 
     if (is.null(base_interval)) {
@@ -174,9 +174,9 @@ pattern_to_semitones <- function(pattern) {
 
     # Calculate semitones based on modifiers
     semitones[i] <- base_interval$semitones
-    if (grepl("♭", pattern[i])) {
+    if (grepl("♭", pattern[i]) || grepl("b", pattern[i])) {
       semitones[i] <- semitones[i] - 1
-    } else if (grepl("♯", pattern[i])) {
+    } else if (grepl("♯", pattern[i]) || grepl("#", pattern[i])) {
       semitones[i] <- semitones[i] + 1
     }
   }
@@ -294,12 +294,14 @@ plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
     show_tuning = TRUE,
     fret_labels = c(3, 5, 7, 9, 12),
     label_color = "white",
-    point_fill = "dodgerblue"
+    point_fill = "black"
   )
 
   # Add title
   title <- paste(key, scale_name, "Scale")
   p <- p + ggtitle(title)
+
+  save_plot_to_file(p, title)
 
   return(p)
 }
@@ -307,7 +309,6 @@ plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
 # Example usage:
 # Plot C Phrygian Dominant scale
 #   p <- plot_scale("Phrygian Dominant", "C")
-#   save_plot_to_file(p, "c_phrygian_dominant")
 
 # Function to get interval by degree
 get_interval_by_degree <- function(degree) {
