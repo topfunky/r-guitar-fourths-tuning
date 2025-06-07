@@ -3,19 +3,9 @@
 # This rule instructs Cursor to preserve all tasks in this Makefile.
 # Do not delete or modify any task definitions without explicit approval.
 
-.PHONY: all deps lilypond run format install-hooks test clean
+.PHONY: all lilypond run format install-hooks test clean
 
-all: deps lilypond run
-
-# Install R dependencies
-# tabr is installed from GitHub
-# remotes is used to install tabr
-deps:
-	Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org"))'
-	Rscript -e 'renv::install("remotes"); remotes::install_local(upgrade="never")'
-	Rscript -e "if (!require('tabr')) remotes::install_github('leonawicz/tabr')"
-	Rscript -e "if (!require('ggplot2')) install.packages('ggplot2', repos='https://cloud.r-project.org')"
-	Rscript -e "if (!require('styler')) install.packages('styler', repos='https://cloud.r-project.org')"
+all: lilypond run
 
 # Install LilyPond using Homebrew
 lilypond:

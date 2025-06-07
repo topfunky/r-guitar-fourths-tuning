@@ -23,9 +23,6 @@ jobs:
       run: |
         make lilypond
 
-    - name: Install R dependencies
-      run: make deps
-
     - name: Run tests
       run: make test
 
@@ -45,9 +42,6 @@ jobs:
     - name: Install system dependencies
       run: |
         make lilypond
-
-    - name: Install R dependencies
-      run: make deps
 
     - name: Build
       run: make run
