@@ -83,4 +83,3 @@ for (scale in scales) {
     highlight_label_color = "black"
   )
 }
-

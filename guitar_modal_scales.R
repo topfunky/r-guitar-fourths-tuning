@@ -15,4 +15,3 @@ for (scale_pattern in scale_patterns) {
   # Print progress
   cat(sprintf("Rendered %s scale\n", scale_name))
 }
-
