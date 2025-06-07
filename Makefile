@@ -11,6 +11,7 @@ all: deps lilypond run
 # tabr is installed from GitHub
 # remotes is used to install tabr
 deps:
+	Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org"))'
 	Rscript -e "if (!require('remotes')) install.packages('remotes')"
 	Rscript -e "if (!require('tabr')) remotes::install_github('leonawicz/tabr')"
 	Rscript -e "if (!require('ggplot2')) install.packages('ggplot2')"
