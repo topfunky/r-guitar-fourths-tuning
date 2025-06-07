@@ -124,13 +124,10 @@ scale_patterns <- list(
     pattern = c("1", "♭2", "♭3", "♭4", "♭5", "♭6", "♭7")
   ),
   list(
-    name = "Diminished",
-    pattern = c("1", "2", "♭3", "4", "♭5", "♭6", "7")
-  ),
-  list(
     name = "Whole Tone",
     pattern = c("1", "2", "3", "♯4", "♯5", "♭7")
   ),
+
   list(
     name = "Blues",
     pattern = c("1", "♭3", "4", "♭5", "5", "♭7")
@@ -142,6 +139,10 @@ scale_patterns <- list(
   list(
     name = "Barry Harris Diminished Minor",
     pattern = c("1", "2", "♭3", "4", "5", "♯5", "6", "7")
+  ),
+  list(
+    name = "Whole Half",
+    pattern = c("1", "2", "♭3", "4", "♭5", "♭6", "6", "7")
   )
 )
 
