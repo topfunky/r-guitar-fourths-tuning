@@ -11,20 +11,12 @@ if (!require("ggplot2")) install.packages("ggplot2")
 library(tabr)
 library(ggplot2)
 
+# Source the save file utilities
+source("utils_save_file.R")
+
 # Define the tuning (EADGCF)
 tuning <- "e2 a2 d3 g3 c4 f4"
 
-# Helper function to save plots to file
-save_plot_to_file <- function(plot, name) {
-  # Create plots directory if it doesn't exist
-  if (!dir.exists("plots")) {
-    dir.create("plots")
-  }
-
-  # Save the plot
-  filename <- paste0("plots/", tolower(gsub(" ", "_", name)), ".png")
-  ggsave(filename, plot, width = 10, height = 6, bg = "white")
-}
 
 # A simple function to plot and save a single chord.
 # Assumes that there is only one note on each string.

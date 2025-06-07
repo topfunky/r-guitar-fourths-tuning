@@ -1,5 +1,5 @@
-# Source the utils_plot.R file
 source("utils_plot.R")
+source("music_theory.R")
 
 # Define fret positions for each string in C major scale
 string_6_frets <- c(0, 1, 3, 5, 7, 8, 10, 12, 13, 15) # Low E string
@@ -71,6 +71,7 @@ scales <- list(
   )
 )
 
+
 # Plot and save each scale
 for (scale in scales) {
   plot_and_save_scale(
@@ -82,3 +83,8 @@ for (scale in scales) {
     highlight_label_color = "black"
   )
 }
+
+
+# Plot C Phrygian Dominant scale
+p <- plot_scale("Phrygian Dominant", "C")
+save_plot_to_file(p, "c_phrygian_dominant")
