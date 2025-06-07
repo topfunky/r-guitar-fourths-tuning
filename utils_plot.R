@@ -1,7 +1,8 @@
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 
 # Install remotes if not already installed
-if (!require("remotes")) install.packages("remotes")
+if (!require("remotes"))
+  install.packages("remotes", repos = "https://cloud.r-project.org")
 
 # Install tabr from GitHub if not available
 if (!require("tabr")) remotes::install_github("leonawicz/tabr")

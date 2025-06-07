@@ -1,4 +1,15 @@
 # Load libraries
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+# Install remotes if not already installed
+if (!require("remotes"))
+  install.packages("remotes", repos = "https://cloud.r-project.org")
+
+# Install tabr from GitHub if not available
+if (!require("tabr")) remotes::install_github("leonawicz/tabr")
+if (!require("ggplot2")) install.packages("ggplot2")
+
+# Load libraries
 library(tabr)
 library(ggplot2)
 
@@ -244,23 +255,25 @@ get_scale_fretboard_positions <- function(
 ) {
   # Get the transposed scale
   scale <- transpose_scale(scale_name, key)
+  tuning_list <- strsplit(tuning, " ")[[1]]
 
-  # Define the tuning (EADGCF)
-  tuning <- c("E2", "A2", "D3", "G3", "C4", "F4")
-  tuning_semitones <- sapply(tuning, function(note) {
+  tuning_semitones <- sapply(tuning_list, function(note) {
     # Extract the base note (without octave)
     base_note <- gsub("[0-9]", "", note)
+    # Convert to uppercase for the note_semitones lookup
+    base_note <- toupper(base_note)
     note_semitones[[base_note]]
   })
 
   # Calculate all possible positions
   positions <- list()
-  for (string in 1:6) {
-    string_semitones <- tuning_semitones[string]
+  for (i in seq_along(tuning_semitones)) {
+    string <- 7 - i  # string 6 for i=1, ..., string 1 for i=6
+    string_semitones <- tuning_semitones[i]
     for (fret in start_fret:end_fret) {
-      note_semitones <- (string_semitones + fret) %% 12
+      note_semitones_val <- (string_semitones + fret) %% 12
       for (interval in scale) {
-        if (interval$semitones == note_semitones) {
+        if (interval$semitones == note_semitones_val) {
           positions[[length(positions) + 1]] <- list(
             string = string,
             fret = fret,
@@ -271,9 +284,6 @@ get_scale_fretboard_positions <- function(
       }
     }
   }
-
-  # DEBUG: Print the positions in a Markdown formatted table
-  print_positions_table(positions)
 
   return(positions)
 }
