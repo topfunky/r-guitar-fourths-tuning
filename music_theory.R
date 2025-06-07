@@ -268,7 +268,7 @@ get_scale_fretboard_positions <- function(
   # Calculate all possible positions
   positions <- list()
   for (i in seq_along(tuning_semitones)) {
-    string <- 7 - i  # string 6 for i=1, ..., string 1 for i=6
+    string <- 7 - i # string 6 for i=1, ..., string 1 for i=6
     string_semitones <- tuning_semitones[i]
     for (fret in start_fret:end_fret) {
       note_semitones_val <- (string_semitones + fret) %% 12
@@ -303,6 +303,17 @@ plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
   frets <- sapply(positions, function(p) p$fret)
   labels <- sapply(positions, function(p) p$symbol)
 
+  # Create color vectors for all notes
+  point_colors <- rep("black", length(strings))
+  label_colors <- rep("white", length(strings))
+
+  # Find root note positions (degree 1)
+  root_positions <- which(sapply(positions, function(p) p$degree == 1))
+
+  # Set colors for root notes
+  point_colors[root_positions] <- "white"
+  label_colors[root_positions] <- "black"
+
   # Create the plot
   p <- plot_fretboard(
     string = strings,
@@ -312,8 +323,8 @@ plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
     tuning = tuning,
     show_tuning = TRUE,
     fret_labels = c(3, 5, 7, 9, 12),
-    label_color = "white",
-    point_fill = "black"
+    label_color = label_colors,
+    point_fill = point_colors
   )
 
   # Add title

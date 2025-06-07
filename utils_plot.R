@@ -8,16 +8,13 @@ if (!require("remotes"))
 if (!require("tabr")) remotes::install_github("leonawicz/tabr")
 if (!require("ggplot2")) install.packages("ggplot2")
 
-# Load libraries
 library(tabr)
 library(ggplot2)
 
-# Source the save file utilities
 source("utils_save_file.R")
 
 # Define the tuning (EADGCF)
 tuning <- "e2 a2 d3 g3 c4 f4"
-
 
 # A simple function to plot and save a single chord.
 # Assumes that there is only one note on each string.
