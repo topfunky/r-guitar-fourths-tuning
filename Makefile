@@ -3,9 +3,13 @@
 # This rule instructs Cursor to preserve all tasks in this Makefile.
 # Do not delete or modify any task definitions without explicit approval.
 
-.PHONY: all lilypond run format install-hooks test clean dependencies
+.PHONY: all lilypond run format install-hooks test clean dependencies act
 
 all: lilypond run
+
+# Run the GitHub Actions workflow locally
+act:
+	act -W .github/workflows/test.yml --container-architecture linux/amd64
 
 # Install LilyPond using Homebrew
 lilypond:
