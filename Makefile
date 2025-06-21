@@ -11,9 +11,10 @@ all: lilypond run
 act:
 	act -W .github/workflows/test.yml --container-architecture linux/amd64
 
-# Install LilyPond using Homebrew
+# Install LilyPond on macOS with Homebrew
 lilypond:
 	brew install lilypond
+	brew install lilypond-font-manager
 
 # Install R language dependencies
 dependencies:

@@ -15,7 +15,7 @@ permissions:
 jobs:
   test:
     name: Run Tests
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -27,9 +27,19 @@ jobs:
       with:
         r-version: '4.4.0'
 
+    - name: Install LilyPond (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install lilypond
+
+    - name: Install LilyPond (Ubuntu)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lilypond
+
     - name: Install system dependencies
       run: |
-        make lilypond
         make dependencies
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,7 +52,7 @@ jobs:
   build:
     name: Build and Deploy
     needs: test
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -54,9 +64,19 @@ jobs:
       with:
         r-version: '4.4.0'
 
+    - name: Install LilyPond (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install lilypond
+
+    - name: Install LilyPond (Ubuntu)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lilypond
+
     - name: Install system dependencies
       run: |
-        make lilypond
         make dependencies
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
