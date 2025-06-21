@@ -1,13 +1,4 @@
-# Load libraries
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-
-# Install remotes if not already installed
-if (!require("remotes"))
-  install.packages("remotes", repos = "https://cloud.r-project.org")
-
-# Install tabr from GitHub if not available
-if (!require("tabr")) remotes::install_github("leonawicz/tabr")
-if (!require("ggplot2")) install.packages("ggplot2")
+source("dependencies.R")
 
 # Load libraries
 library(tabr)
@@ -15,6 +6,7 @@ library(ggplot2)
 
 source("utils_save_file.R")
 
+# Fourths tuning
 tuning <- "e2 a2 d3 g3 c4 f4"
 
 # Define intervals in a major scale
@@ -70,7 +62,8 @@ major_scale_intervals <- list(
   )
 )
 
-# Define scale patterns
+# Define scale patterns as a data structure.
+#
 # Each pattern is defined by its name and the intervals relative
 # to the major scale.
 # Use "♭" for flat (lower by 1 semitone) and "♯" for sharp (raise by 1 semitone)
@@ -168,6 +161,9 @@ note_semitones <- list(
 )
 
 # Function to get scale pattern by name
+#
+# @param scale_name The name of the scale to get the pattern for
+# @return A list with the name and pattern of the scale
 get_scale_pattern <- function(scale_name) {
   for (pattern in scale_patterns) {
     if (tolower(pattern$name) == tolower(scale_name)) {
@@ -178,6 +174,9 @@ get_scale_pattern <- function(scale_name) {
 }
 
 # Function to convert scale pattern to semitones
+#
+# @param pattern A list of strings, each representing an interval
+# @return A list of semitones, each corresponding to an interval in the pattern
 pattern_to_semitones <- function(pattern) {
   semitones <- numeric(length(pattern))
 
@@ -203,6 +202,13 @@ pattern_to_semitones <- function(pattern) {
 }
 
 # Function to get scale intervals by name
+#
+# Returns a list of intervals, each with degree, semitones, and symbol
+# The degree is the position of the interval in the scale, starting at 1 for the root
+# The semitones is the number of semitones from the root
+# The symbol is the symbol of the interval
+# The symbol is a string of the form "1", "2", "3", "4", "5", "6", "7", "8"
+# The symbol is the symbol of the interval
 get_scale_intervals <- function(scale_name) {
   pattern <- get_scale_pattern(scale_name)
   if (is.null(pattern)) {
@@ -247,7 +253,6 @@ transpose_scale <- function(scale_name, key) {
   return(transposed)
 }
 
-# Function to get fretboard positions for a scale
 get_scale_fretboard_positions <- function(
   scale_name,
   key,
@@ -289,7 +294,6 @@ get_scale_fretboard_positions <- function(
   return(positions)
 }
 
-# Function to plot a scale on the fretboard
 plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
   # Get the positions
   positions <- get_scale_fretboard_positions(
@@ -341,7 +345,6 @@ plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
 # Plot C Phrygian Dominant scale
 #   p <- plot_scale("Phrygian Dominant", "C")
 
-# Function to get interval by degree
 get_interval_by_degree <- function(degree) {
   # Validate input
   if (is.null(degree) || is.na(degree) || !is.numeric(degree)) {
@@ -356,7 +359,6 @@ get_interval_by_degree <- function(degree) {
   return(NULL)
 }
 
-# Function to get interval by semitones
 get_interval_by_semitones <- function(semitones) {
   # Validate input
   if (is.null(semitones) || is.na(semitones) || !is.numeric(semitones)) {

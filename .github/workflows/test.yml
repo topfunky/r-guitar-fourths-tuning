@@ -22,6 +22,7 @@ jobs:
     - name: Install system dependencies
       run: |
         make lilypond
+        make dependencies
 
     - name: Run tests
       run: make test
@@ -42,6 +43,7 @@ jobs:
     - name: Install system dependencies
       run: |
         make lilypond
+        make dependencies
 
     - name: Build
       run: make run

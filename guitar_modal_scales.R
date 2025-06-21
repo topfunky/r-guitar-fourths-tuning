@@ -10,12 +10,12 @@ for (scale_pattern in scale_patterns) {
   scale_name <- scale_pattern$name
 
   # Print progress
-  cat(sprintf("# Rendering %s scale in %s\n", scale_name, key))
+  cat(sprintf("🎸 Rendering %s scale in %s\n", scale_name, key))
 
   # Create the plot
   p <- plot_scale(scale_name, key)
 }
 
 # DEBUG
-cat("# E Major scale\n")
+cat("🎸 DEBUG E Major scale\n")
 p <- plot_scale("Major", "E")

@@ -3,7 +3,7 @@
 # This rule instructs Cursor to preserve all tasks in this Makefile.
 # Do not delete or modify any task definitions without explicit approval.
 
-.PHONY: all lilypond run format install-hooks test clean
+.PHONY: all lilypond run format install-hooks test clean dependencies
 
 all: lilypond run
 
@@ -11,11 +11,13 @@ all: lilypond run
 lilypond:
 	brew install lilypond
 
+# Install R language dependencies
+dependencies:
+	Rscript dependencies.R
+
 # Run the R script to generate the visualization
 run: clean
-	Rscript guitar_scale.R
 	Rscript guitar_chord.R
-	Rscript guitar_scale_relative.R
 	Rscript guitar_modal_scales.R
 
 # Format R files
