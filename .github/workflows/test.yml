@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 
+# Set permissions for the workflow
+permissions:
+  contents: read
+  packages: read
+  actions: read
+
 jobs:
   test:
     name: Run Tests
@@ -13,6 +19,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
@@ -23,9 +31,13 @@ jobs:
       run: |
         make lilypond
         make dependencies
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Run tests
       run: make test
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     name: Build and Deploy
@@ -34,6 +46,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
@@ -44,6 +58,10 @@ jobs:
       run: |
         make lilypond
         make dependencies
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build
       run: make run
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
