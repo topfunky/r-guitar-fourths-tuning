@@ -4,10 +4,12 @@
 # Load libraries
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 
-# Install remotes if not already installed
-if (!require("remotes"))
-  install.packages("remotes", repos = "https://cloud.r-project.org")
+if (!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
 
-# Install tabr from GitHub if not available
-if (!require("tabr")) remotes::install_github("leonawicz/tabr")
+if (!requireNamespace("tabr", quietly = TRUE)) {
+  remotes::install_github("leonawicz/tabr")
+}
+
 if (!require("ggplot2")) install.packages("ggplot2")
