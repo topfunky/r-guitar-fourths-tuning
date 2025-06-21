@@ -1,9 +1,11 @@
 # Guitar tab visualization
 
-Using https://leonawicz.github.io/tabr/articles/tabr-fretboard.html, creates a chart of chords and scales.
+Creates a chart of chords and scales.
+
+Uses https://leonawicz.github.io/tabr/articles/tabr-fretboard.html.
 
 Uses fourths tuning EADGCF.
 
-![C major scale](plots/scale_c_major.png)
+![C major scale](plots/c_major_scale.png)
 
-![C major intervals](plots/scale_c_major_(intervals).png)
+![C natural minor scale](plots/c_natural_minor_scale.png)
