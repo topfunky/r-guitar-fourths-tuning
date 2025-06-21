@@ -312,12 +312,26 @@ plot_scale <- function(scale_name, key, start_fret = 0, end_fret = 12) {
   point_colors <- rep("black", length(strings))
   label_colors <- rep("white", length(strings))
 
+  # ----------------------------------------------------------------------------
+  # Set special colors for root, 3rd, 5th, and 7th notes
+
   # Find root note positions (degree 1)
   root_positions <- which(sapply(positions, function(p) p$degree == 1))
 
   # Set colors for root notes
   point_colors[root_positions] <- "white"
   label_colors[root_positions] <- "black"
+
+  # Find positions for degrees 3, 5, and 7
+  degree_357_positions <- which(sapply(
+    positions,
+    function(p) p$degree %in% c(3, 5, 7)
+  ))
+
+  # Set colors for degrees 3, 5, and 7
+  point_colors[degree_357_positions] <- "gray30"
+  label_colors[degree_357_positions] <- "white"
+  # ----------------------------------------------------------------------------
 
   # Create the plot
   p <- plot_fretboard(

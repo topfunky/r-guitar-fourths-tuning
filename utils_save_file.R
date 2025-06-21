@@ -7,5 +7,5 @@ save_plot_to_file <- function(plot, name) {
 
   # Save the plot
   filename <- paste0("plots/", tolower(gsub(" ", "_", name)), ".png")
-  ggsave(filename, plot, width = 10, height = 6, bg = "white")
+  ggsave(filename, plot, width = 10, height = 5, bg = "white")
 }
