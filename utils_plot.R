@@ -29,7 +29,7 @@ plot_and_save_chord <- function(
     "notes",
     horizontal = TRUE,
     tuning = tuning,
-    show_tuning = TRUE,
+    # show_tuning = TRUE,
     fret_labels = c(3, 5, 7, 9, 12),
     label_color = label_color,
     point_fill = point_fill
@@ -90,7 +90,7 @@ plot_and_save_scale <- function(
     fret = fret_positions,
     horizontal = TRUE,
     tuning = tuning,
-    show_tuning = TRUE,
+    # show_tuning = TRUE,
     fret_labels = c(3, 5, 7, 9, 12),
     label_color = label_colors,
     point_fill = point_colors
